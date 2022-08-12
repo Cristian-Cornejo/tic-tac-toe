@@ -10,12 +10,13 @@
         <button>PLAYER</button>
         <button>BOT</button>
       </div>
-      <h2>pick player 1's mark</h2>
+      <h2>Pick player 1's mark</h2>
       <div class="centered-row mark-selector__toggler">
         <button class="container start-menu__button start-menu__x-button"><span>x</span></button>
         <button class="container start-menu__button start-menu__o-button">o</button>
       </div>
       <p>remember: x goes first</p>
+      <button class="container start-menu__start-button">START!</button>
     </div>
   </div>
 </template>
@@ -36,6 +37,22 @@
   text-align: center;
   padding: 4px;
   font-weight: bold;
+}
+
+.start-menu__start-button {
+  border: none;
+  font-weight: bolder;
+  font-size: 28px;
+  padding: 4px 12px;
+  transition: all 0.2s;
+  background-color: var(--green-color);
+  color: var(--white-color);
+  box-shadow: 0px 8px var(--dark-green-color);
+}
+
+.start-menu__start-button:hover {
+  box-shadow: 0px 0px var(--dark-green-color);
+  transform: translateY(8px);
 }
 
 .start-menu__game_mode button {
@@ -138,6 +155,7 @@
 .start-menu__mark-selector {
   background-color: var(--light-pink-color);
   box-shadow: 0px 8px var(--pink-color);
+  padding: 32px 24px;
 }
 
 .start-menu__mark-selector h2 {
