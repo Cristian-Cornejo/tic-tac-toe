@@ -25,7 +25,6 @@ html {
   --light-pink-color: rgb(252, 119, 177);
   --pink-color: rgb(217, 43, 142);
   --white-color: white;
-  --gray-color: rgb(209, 209, 209);
   background-color: var(--blue-color);
   font-family: 'Rubik', sans-serif;
 }

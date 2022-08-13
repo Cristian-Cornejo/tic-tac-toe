@@ -62,11 +62,9 @@ const tiles = ref([
   border-bottom-left-radius: 8px;
 }
 
-
 .game-tile:nth-child(9) {
   border-bottom-right-radius: 8px;
 }
-
 
 .game-tile:nth-child(2n+1):hover {
   transform: translateY(0px);
