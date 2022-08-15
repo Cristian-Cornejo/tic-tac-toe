@@ -8,7 +8,7 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-import Tile from '../components/tile.vue'
+import Tile from '../components/Tile.vue'
 const tiles = ref([
   { id: 0, selectedBy: null },
   { id: 1, selectedBy: 'X' },
