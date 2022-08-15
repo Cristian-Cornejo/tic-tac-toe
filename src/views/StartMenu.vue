@@ -1,18 +1,21 @@
 <script setup lang="ts">
 import GameMode from '../components/GameMode.vue';
 import MarkSelector from '../components/MarkSelector.vue';
+import BoardLayout from '../components/shared/BoardLayout.vue';
 </script>
 
 <template>
   <div class="centered-column">
     <h1 class="start-menu__title">TIC TAC TOE</h1>
-    <div class="container centered-column start-menu__wrapper">
-      <GameMode />
-      <h2>Pick player 1's mark</h2>
-      <MarkSelector />
-      <p>remember: x goes first</p>
-      <button class="container start-menu__start-button">START!</button>
-    </div>
+    <BoardLayout>
+      <div class="centered-column start-menu__wrapper">
+        <GameMode />
+        <h2>Pick player 1's mark</h2>
+        <MarkSelector />
+        <p>remember: x goes first</p>
+        <button class="container start-menu__start-button">START!</button>
+      </div>
+    </BoardLayout>
   </div>
 </template>
 
@@ -41,8 +44,6 @@ import MarkSelector from '../components/MarkSelector.vue';
 }
 
 .start-menu__wrapper {
-  background-color: var(--light-pink-color);
-  box-shadow: 0px 8px var(--pink-color);
   padding: 32px 24px;
 }
 
