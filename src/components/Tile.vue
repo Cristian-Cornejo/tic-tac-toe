@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { selectedBy } = defineProps<{ selectedBy: string | null }>();
+const { selectedBy } = defineProps<{ selectedBy: String | null }>();
 </script>
 
 <template>

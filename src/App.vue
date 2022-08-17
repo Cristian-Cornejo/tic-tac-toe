@@ -1,16 +1,8 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">New Game</RouterLink>
-        <RouterLink to="/game">Game</RouterLink>
-      </nav>
-    </div>
-  </header>
   <RouterView />
 </template>
 

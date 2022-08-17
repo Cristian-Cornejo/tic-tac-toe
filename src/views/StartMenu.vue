@@ -1,10 +1,22 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import GameMode from '../components/GameMode.vue';
 import MarkSelector from '../components/MarkSelector.vue';
 import BoardLayout from '../components/shared/BoardLayout.vue';
+import { useConfigStore } from "@/stores/config";
+import type { Config } from "@/stores/config";
+const router = useRouter();
+
 const isXMarkSelected = ref(true);
 const isVsPlayer = ref(true);
+
+const start = () => {
+  const configStore = useConfigStore();
+  const config: Config = { isVsPlayer: isVsPlayer.value, isXMarkSelected: isXMarkSelected.value };
+  configStore.update(config);
+  router.push({ path: '/game' });
+}
 
 </script>
 
@@ -17,7 +29,7 @@ const isVsPlayer = ref(true);
         <h2>Pick player 1's mark</h2>
         <MarkSelector v-model:isXMarkSelected="isXMarkSelected" />
         <p>remember: x goes first</p>
-        <button class="container start-menu__start-button">START!</button>
+        <button type="button" class="container start-menu__start-button" @click="start">START!</button>
       </div>
     </BoardLayout>
   </div>
