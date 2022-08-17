@@ -1,15 +1,26 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-const isVsPlayer = ref(true);
+import { ref, watchEffect } from 'vue';
+
+const { isVsPlayer } = defineProps<{ isVsPlayer: Boolean }>();
+
+const localIsVsPlayer = ref(isVsPlayer);
+
+const emit = defineEmits(['update:isVsPlayer']);
+
+watchEffect(() => (emit('update:isVsPlayer', localIsVsPlayer.value)));
+
+const playerButtonOnClick = () => !localIsVsPlayer.value && (localIsVsPlayer.value = !localIsVsPlayer.value)
+
+const botButtonOnClick = () => !!localIsVsPlayer.value && (localIsVsPlayer.value = !localIsVsPlayer.value)
 
 </script>
 <template>
     <div class="game-mode">
         <p>PLAYER VS.</p>
-        <button class="game-mode__vs-player-button" v-on:click="!isVsPlayer && (isVsPlayer = !isVsPlayer)"
-            v-bind:class="{ pressed: isVsPlayer }">PLAYER</button>
-        <button class="game-mode__vs-bot-button" v-on:click="isVsPlayer && (isVsPlayer = !isVsPlayer)"
-            v-bind:class="{ pressed: !isVsPlayer }">BOT</button>
+        <button class="game-mode__vs-player-button" v-on:click="playerButtonOnClick"
+            v-bind:class="{ pressed: localIsVsPlayer }">PLAYER</button>
+        <button class="game-mode__vs-bot-button" v-on:click="botButtonOnClick"
+            v-bind:class="{ pressed: !localIsVsPlayer }">BOT</button>
     </div>
 </template>
 <style scoped>

@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
+import { ref } from 'vue';
 import GameMode from '../components/GameMode.vue';
 import MarkSelector from '../components/MarkSelector.vue';
 import BoardLayout from '../components/shared/BoardLayout.vue';
-
 const isXMarkSelected = ref(true);
-watchEffect(() => console.log('Value start-menu: ' + isXMarkSelected.value));
+const isVsPlayer = ref(true);
 
 </script>
 
@@ -14,7 +13,7 @@ watchEffect(() => console.log('Value start-menu: ' + isXMarkSelected.value));
     <h1 class="start-menu__title">TIC TAC TOE</h1>
     <BoardLayout>
       <div class="centered-column start-menu__wrapper">
-        <GameMode />
+        <GameMode v-model:isVsPlayer="isVsPlayer" />
         <h2>Pick player 1's mark</h2>
         <MarkSelector v-model:isXMarkSelected="isXMarkSelected" />
         <p>remember: x goes first</p>
