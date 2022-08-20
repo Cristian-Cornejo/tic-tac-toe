@@ -1,23 +1,24 @@
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
 
 export const useConfigStore = defineStore({
-  id: 'config',
-  state: () => ({
-    isXMarkSelected: true,
-    isVsPlayer: true,
-  } as Config),
+  id: "config",
+  state: () =>
+    ({
+      isXMarkSelected: true,
+      isVsPlayer: true,
+    } as Config),
   getters: {
-    config: (state) => state
+    config: (state) => state,
   },
   actions: {
     update(config: Config) {
       this.isVsPlayer = config.isVsPlayer;
       this.isXMarkSelected = config.isXMarkSelected;
-    }
-  }
-})
+    },
+  },
+});
 
 export interface Config {
-  isXMarkSelected: Boolean,
-  isVsPlayer: Boolean,
+  isXMarkSelected: boolean;
+  isVsPlayer: boolean;
 }

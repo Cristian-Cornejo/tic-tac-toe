@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import Tile from '../components/Tile.vue'
-import BoardLayout from '../components/shared/BoardLayout.vue'
-import { useConfigStore } from '@/stores/config';
-import { useGameStore, type GameTile } from '@/stores/game';
+import { ref } from "vue";
+import BoardTile from "../components/BoardTile.vue";
+import BoardLayout from "../components/shared/BoardLayout.vue";
+import { useConfigStore } from "@/stores/config";
+import { useGameStore, type GameTile } from "@/stores/game";
 
 const configStore = useConfigStore();
 const gameStore = useGameStore();
@@ -15,7 +15,7 @@ const onClickTile = (tile: GameTile) => {
     gameStore.update(tile);
     playerOneHasSelectX.value = !playerOneHasSelectX.value;
   }
-}
+};
 </script>
 
 <template>
@@ -23,8 +23,13 @@ const onClickTile = (tile: GameTile) => {
     <h2>Player 1 turn</h2>
     <BoardLayout>
       <div class="container game-board">
-        <Tile :selectedBy="tile.selectedBy" v-for="tile in gameStore.tiles" :key="tile.id" @click="onClickTile(tile)">
-        </Tile>
+        <BoardTile
+          :selectedBy="tile.selectedBy"
+          v-for="tile in gameStore.tiles"
+          :key="tile.id"
+          @click="onClickTile(tile)"
+        >
+        </BoardTile>
       </div>
       <div>{{ gameStore.someoneWon }}</div>
     </BoardLayout>

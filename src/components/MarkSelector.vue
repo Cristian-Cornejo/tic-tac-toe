@@ -1,72 +1,79 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
+const props = defineProps<{ isXMarkSelected: boolean }>();
 
-const { isXMarkSelected } = defineProps<{ isXMarkSelected: Boolean }>();
+const emit = defineEmits(["update:isXMarkSelected"]);
 
-const localSelected = ref(isXMarkSelected);
+const oClick = () =>
+  !props.isXMarkSelected &&
+  emit("update:isXMarkSelected", !props.isXMarkSelected);
 
-const emit = defineEmits(['update:isXMarkSelected']);
-
-watchEffect(() => (emit('update:isXMarkSelected', localSelected.value)));
-
-const oClick = () => !localSelected.value && (localSelected.value = !localSelected.value)
-
-const xClick = () => !!localSelected.value && (localSelected.value = !localSelected.value)
-
+const xClick = () =>
+  !!props.isXMarkSelected &&
+  emit("update:isXMarkSelected", !props.isXMarkSelected);
 </script>
 
 <template>
-    <div class="centered-row mark-selector__toggler">
-        <button class="container mark-selector__button mark-selector__x-button" v-on:click="oClick"
-            v-bind:class="{ pressed: localSelected }"><span>x</span></button>
-        <button class="container mark-selector__button mark-selector__o-button" v-on:click="xClick"
-            v-bind:class="{ pressed: !localSelected }">o</button>
-    </div>
+  <div class="centered-row mark-selector__toggler">
+    <button
+      class="container mark-selector__button mark-selector__x-button"
+      v-on:click="oClick"
+      v-bind:class="{ pressed: props.isXMarkSelected }"
+    >
+      <span>x</span>
+    </button>
+    <button
+      class="container mark-selector__button mark-selector__o-button"
+      v-on:click="xClick"
+      v-bind:class="{ pressed: !props.isXMarkSelected }"
+    >
+      o
+    </button>
+  </div>
 </template>
 
 <style scoped>
 .mark-selector__toggler {
-    width: 100%;
+  width: 100%;
 }
 
 .mark-selector__toggler button {
-    width: 80px;
-    height: 40px;
-    border: none;
+  width: 80px;
+  height: 40px;
+  border: none;
 }
 
-.mark-selector__toggler button+button {
-    margin-left: 8px;
+.mark-selector__toggler button + button {
+  margin-left: 8px;
 }
 
 .mark-selector__button {
-    font-weight: bolder;
-    font-size: 28px;
-    padding: 4px;
-    transition: all 0.2s;
+  font-weight: bolder;
+  font-size: 28px;
+  padding: 4px;
+  transition: all 0.2s;
 }
 
 .mark-selector__x-button {
-    background-color: var(--blue-color);
-    color: var(--dark-blue-color);
-    box-shadow: 0px 8px var(--dark-blue-color);
+  background-color: var(--blue-color);
+  color: var(--dark-blue-color);
+  box-shadow: 0px 8px var(--dark-blue-color);
 }
 
 .mark-selector__x-button.pressed {
-    box-shadow: 0px 0px var(--dark-blue-color);
-    color: var(--white-color);
-    transform: translateY(8px);
+  box-shadow: 0px 0px var(--dark-blue-color);
+  color: var(--white-color);
+  transform: translateY(8px);
 }
 
 .mark-selector__o-button {
-    background-color: var(--green-color);
-    color: var(--dark-blue-color);
-    box-shadow: 0px 8px var(--dark-green-color);
+  background-color: var(--green-color);
+  color: var(--dark-blue-color);
+  box-shadow: 0px 8px var(--dark-green-color);
 }
 
 .mark-selector__o-button.pressed {
-    box-shadow: 0px 0px var(--dark-green-color);
-    transform: translateY(8px);
-    color: var(--white-color);
+  box-shadow: 0px 0px var(--dark-green-color);
+  transform: translateY(8px);
+  color: var(--white-color);
 }
 </style>

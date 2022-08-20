@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import GameMode from '../components/GameMode.vue';
-import MarkSelector from '../components/MarkSelector.vue';
-import BoardLayout from '../components/shared/BoardLayout.vue';
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import GameMode from "../components/GameMode.vue";
+import MarkSelector from "../components/MarkSelector.vue";
+import BoardLayout from "../components/shared/BoardLayout.vue";
 import { useConfigStore } from "@/stores/config";
 import type { Config } from "@/stores/config";
 const router = useRouter();
@@ -13,11 +13,13 @@ const isVsPlayer = ref(true);
 
 const start = () => {
   const configStore = useConfigStore();
-  const config: Config = { isVsPlayer: isVsPlayer.value, isXMarkSelected: isXMarkSelected.value };
+  const config: Config = {
+    isVsPlayer: isVsPlayer.value,
+    isXMarkSelected: isXMarkSelected.value,
+  };
   configStore.update(config);
-  router.push({ path: '/game' });
-}
-
+  router.push({ path: "/game" });
+};
 </script>
 
 <template>
@@ -29,7 +31,13 @@ const start = () => {
         <h2>Pick player 1's mark</h2>
         <MarkSelector v-model:isXMarkSelected="isXMarkSelected" />
         <p>remember: x goes first</p>
-        <button type="button" class="container start-menu__start-button" @click="start">START!</button>
+        <button
+          type="button"
+          class="container start-menu__start-button"
+          @click="start"
+        >
+          START!
+        </button>
       </div>
     </BoardLayout>
   </div>

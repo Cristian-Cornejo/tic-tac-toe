@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import { RouterView } from "vue-router";
 </script>
 
 <template>
@@ -18,7 +18,7 @@ html {
   --pink-color: rgb(217, 43, 142);
   --white-color: white;
   background-color: var(--blue-color);
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
 }
 
 html,
