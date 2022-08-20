@@ -3,19 +3,20 @@ import { defineStore } from "pinia";
 export const useGameStore = defineStore({
   id: "game",
   state: () =>
-    ({
-      tiles: [
-        { id: 0, selectedBy: null },
-        { id: 1, selectedBy: null },
-        { id: 2, selectedBy: null },
-        { id: 3, selectedBy: null },
-        { id: 4, selectedBy: null },
-        { id: 5, selectedBy: null },
-        { id: 6, selectedBy: null },
-        { id: 7, selectedBy: null },
-        { id: 8, selectedBy: null },
-      ],
-    } as Tiles),
+  ({
+    tiles: [
+      { id: 0, selectedBy: null },
+      { id: 1, selectedBy: null },
+      { id: 2, selectedBy: null },
+      { id: 3, selectedBy: null },
+      { id: 4, selectedBy: null },
+      { id: 5, selectedBy: null },
+      { id: 6, selectedBy: null },
+      { id: 7, selectedBy: null },
+      { id: 8, selectedBy: null },
+    ],
+    playerTurn: null
+  } as Game),
   getters: {
     someoneWon: (state) => {
       const xTileIds = state.tiles
@@ -31,11 +32,19 @@ export const useGameStore = defineStore({
         return "O";
       }
     },
+    markTurn: (state) => state.playerTurn ? "X" : "O"
   },
   actions: {
-    update(tile: GameTile) {
-      const index = this.tiles.findIndex((t) => t.id === tile.id);
-      this.tiles[index] = tile;
+    updateTiles(tile: GameTile) {
+      if (!tile.selectedBy && !this.someoneWon) {
+        tile.selectedBy = this.markTurn;
+        const index = this.tiles.findIndex((t) => t.id === tile.id);
+        this.tiles[index] = tile;
+        this.playerTurn = !this.playerTurn;
+      }
+    },
+    initPlayerTurn(isXMark: Boolean) {
+      this.playerTurn = isXMark;
     },
   },
 });
@@ -60,8 +69,9 @@ const winConditions = [
   [2, 4, 6],
 ];
 
-export type Tiles = {
+export type Game = {
   tiles: GameTile[];
+  playerTurn: Boolean | null;
 };
 
 export interface GameTile {
