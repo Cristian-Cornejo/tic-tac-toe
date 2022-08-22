@@ -2,21 +2,7 @@ import { defineStore } from "pinia";
 
 export const useGameStore = defineStore({
   id: "game",
-  state: () =>
-  ({
-    tiles: [
-      { id: 0, selectedBy: null },
-      { id: 1, selectedBy: null },
-      { id: 2, selectedBy: null },
-      { id: 3, selectedBy: null },
-      { id: 4, selectedBy: null },
-      { id: 5, selectedBy: null },
-      { id: 6, selectedBy: null },
-      { id: 7, selectedBy: null },
-      { id: 8, selectedBy: null },
-    ],
-    playerTurn: null
-  } as Game),
+  state: () => initGame(),
   getters: {
     someoneWon: (state) => {
       const xTileIds = state.tiles
@@ -32,7 +18,7 @@ export const useGameStore = defineStore({
         return "O";
       }
     },
-    markTurn: (state) => state.playerTurn ? "X" : "O"
+    markTurn: (state) => (state.playerTurn ? "X" : "O"),
   },
   actions: {
     updateTiles(tile: GameTile) {
@@ -43,7 +29,7 @@ export const useGameStore = defineStore({
         this.playerTurn = !this.playerTurn;
       }
     },
-    initPlayerTurn(isXMark: Boolean) {
+    initPlayerTurn(isXMark: boolean) {
       this.playerTurn = isXMark;
     },
   },
@@ -56,6 +42,23 @@ const wonValidator = (tilesId: number[]) => {
       ? true
       : acc;
   }, false);
+};
+
+const initGame = (): Game => {
+  return {
+    tiles: [
+      { id: 0, selectedBy: null },
+      { id: 1, selectedBy: null },
+      { id: 2, selectedBy: null },
+      { id: 3, selectedBy: null },
+      { id: 4, selectedBy: null },
+      { id: 5, selectedBy: null },
+      { id: 6, selectedBy: null },
+      { id: 7, selectedBy: null },
+      { id: 8, selectedBy: null },
+    ],
+    playerTurn: null,
+  };
 };
 
 const winConditions = [
@@ -71,7 +74,7 @@ const winConditions = [
 
 export type Game = {
   tiles: GameTile[];
-  playerTurn: Boolean | null;
+  playerTurn: boolean | null;
 };
 
 export interface GameTile {

@@ -12,11 +12,12 @@ html {
   --dark-blue-color: rgb(22, 61, 97);
   --green-color: rgb(58, 180, 157);
   --dark-green-color: rgb(41, 126, 110);
-  --yellow-color: rgb(241, 233, 120);
-  --light-yellow-color: rgb(245, 243, 184);
+  --yellow-color: rgb(235, 228, 137);
+  --dark-yellow-color: rgb(182, 176, 89);
   --light-pink-color: rgb(252, 119, 177);
   --pink-color: rgb(217, 43, 142);
   --white-color: white;
+  --black-color: black;
   background-color: var(--blue-color);
   font-family: "Rubik", sans-serif;
 }

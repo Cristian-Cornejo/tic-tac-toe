@@ -2,11 +2,7 @@ import { defineStore } from "pinia";
 
 export const useConfigStore = defineStore({
   id: "config",
-  state: () =>
-    ({
-      isXMarkSelected: true,
-      isVsPlayer: true,
-    } as Config),
+  state: () => initConfig(),
   getters: {
     config: (state) => state,
   },
@@ -17,6 +13,13 @@ export const useConfigStore = defineStore({
     },
   },
 });
+
+const initConfig = (): Config => {
+  return {
+    isXMarkSelected: true,
+    isVsPlayer: true,
+  };
+};
 
 export interface Config {
   isXMarkSelected: boolean;

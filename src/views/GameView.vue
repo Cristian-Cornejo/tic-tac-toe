@@ -3,12 +3,12 @@ import BoardTile from "../components/BoardTile.vue";
 import BoardLayout from "../components/shared/BoardLayout.vue";
 import { useConfigStore } from "@/stores/config";
 import { useGameStore, type GameTile } from "@/stores/game";
+import WinModal from "../components/shared/WinModal.vue";
 
 const configStore = useConfigStore();
 const gameStore = useGameStore();
 gameStore.initPlayerTurn(configStore.isXMarkSelected);
 const onClickTile = (tile: GameTile) => gameStore.updateTiles(tile);
-
 </script>
 
 <template>
@@ -16,11 +16,17 @@ const onClickTile = (tile: GameTile) => gameStore.updateTiles(tile);
     <h2>Player {{ gameStore.playerTurn ? 1 : 2 }} turn</h2>
     <BoardLayout>
       <div class="container game-board">
-        <BoardTile :selectedBy="tile.selectedBy" v-for="tile in gameStore.tiles" :key="tile.id"
-          @click="onClickTile(tile)">
+        <BoardTile
+          :selectedBy="tile.selectedBy"
+          v-for="tile in gameStore.tiles"
+          :key="tile.id"
+          @click="onClickTile(tile)"
+        >
         </BoardTile>
       </div>
-      <div>{{ gameStore.someoneWon }}</div>
+      <Teleport to="body">
+        <WinModal v-if="!!gameStore.someoneWon" />
+      </Teleport>
     </BoardLayout>
   </div>
 </template>
